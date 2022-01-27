@@ -21,108 +21,117 @@ import com.hilber.cursomc.domain.enums.TipoCliente;
 @Entity
 public class Cliente implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)	
- private Integer id;
- private String nome;
- private String email;
- private String cpfouCnpj;
- private Integer tipo;
- 
- @JsonManagedReference
- @OneToMany(mappedBy="cliente")
- private List<Endereco> enderecos = new ArrayList<>();
- 
- @ElementCollection
- @CollectionTable(name="TELEFONE")
- private Set<String> telefones = new HashSet<>();
- 
- public Cliente() {
- }
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+	private String nome;
+	private String email;
+	private String cpfouCnpj;
+	private Integer tipo;
 
-public Cliente(Integer id, String nome, String email, String cpfouCnpj, TipoCliente tipo) {
-	super();
-	this.id = id;
-	this.nome = nome;
-	this.email = email;
-	this.cpfouCnpj = cpfouCnpj;
-	this.tipo = tipo.getCod();
-}
+	@JsonManagedReference
+	@OneToMany(mappedBy = "cliente")
+	private List<Endereco> enderecos = new ArrayList<>();
 
-public Integer getId() {
-	return id;
-}
+	@ElementCollection
+	@CollectionTable(name = "TELEFONE")
+	private Set<String> telefones = new HashSet<>();
 
-public void setId(Integer id) {
-	this.id = id;
-}
+	@OneToMany(mappedBy="cliente")
+	private List<Pedido> pedidos = new ArrayList<>();
 
-public String getNome() {
-	return nome;
-}
+	public Cliente() {
+	}
 
-public void setNome(String nome) {
-	this.nome = nome;
-}
+	public Cliente(Integer id, String nome, String email, String cpfouCnpj, TipoCliente tipo) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.email = email;
+		this.cpfouCnpj = cpfouCnpj;
+		this.tipo = tipo.getCod();
+	}
 
-public String getEmail() {
-	return email;
-}
+	public Integer getId() {
+		return id;
+	}
 
-public void setEmail(String email) {
-	this.email = email;
-}
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-public String getCpfouCnpj() {
-	return cpfouCnpj;
-}
+	public String getNome() {
+		return nome;
+	}
 
-public void setCpfouCnpj(String cpfouCnpj) {
-	this.cpfouCnpj = cpfouCnpj;
-}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 
-public TipoCliente getTipo() {
-	return TipoCliente.toEnum(tipo);
-}
+	public String getEmail() {
+		return email;
+	}
 
-public void setTipo(TipoCliente tipo) {
-	this.tipo = tipo.getCod();
-}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-public List<Endereco> getEnderecos() {
-	return enderecos;
-}
+	public String getCpfouCnpj() {
+		return cpfouCnpj;
+	}
 
-public void setEnderecos(List<Endereco> enderecos) {
-	this.enderecos = enderecos;
-}
+	public void setCpfouCnpj(String cpfouCnpj) {
+		this.cpfouCnpj = cpfouCnpj;
+	}
 
-public Set<String> getTelefones() {
-	return telefones;
-}
+	public TipoCliente getTipo() {
+		return TipoCliente.toEnum(tipo);
+	}
 
-public void setTelefones(Set<String> telefones) {
-	this.telefones = telefones;
-}
+	public void setTipo(TipoCliente tipo) {
+		this.tipo = tipo.getCod();
+	}
 
-@Override
-public int hashCode() {
-	return Objects.hash(id);
-}
+	public List<Endereco> getEnderecos() {
+		return enderecos;
+	}
 
-@Override
-public boolean equals(Object obj) {
-	if (this == obj)
-		return true;
-	if (obj == null)
-		return false;
-	if (getClass() != obj.getClass())
-		return false;
-	Cliente other = (Cliente) obj;
-	return Objects.equals(id, other.id);
-}
- 
- 
- 
+	public void setEnderecos(List<Endereco> enderecos) {
+		this.enderecos = enderecos;
+	}
+
+	public Set<String> getTelefones() {
+		return telefones;
+	}
+
+	public void setTelefones(Set<String> telefones) {
+		this.telefones = telefones;
+	}
+
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}
+
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Cliente other = (Cliente) obj;
+		return Objects.equals(id, other.id);
+	}
+
 }
